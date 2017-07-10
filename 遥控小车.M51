@@ -1,0 +1,531 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/08/2017  13:53:22  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\PROGRAM FILES (X86)\KEIL_C51\C51\BIN\BL51.EXE STARTUP.obj, main.obj TO 遥控小车
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  main.obj (MAIN)
+  C:\PROGRAM FILES (X86)\KEIL_C51\C51\LIB\C51S.LIB (?C_INIT)
+  C:\PROGRAM FILES (X86)\KEIL_C51\C51\LIB\C51S.LIB (?C?COPY)
+  C:\PROGRAM FILES (X86)\KEIL_C51\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\PROGRAM FILES (X86)\KEIL_C51\C51\LIB\C51S.LIB (?C?CSTOPTR)
+
+
+LINK MAP OF MODULE:  遥控小车 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     002CH     UNIT         ?DT?MAIN
+            DATA    0034H     000FH     UNIT         _DATA_GROUP_
+            DATA    0043H     0003H     UNIT         ?DT?_NRF24L01_RXPACKET?MAIN
+            IDATA   0046H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0131H     UNIT         ?C?LIB_CODE
+            CODE    0134H     00F5H     UNIT         ?PR?MAIN?MAIN
+            CODE    0229H     008CH     UNIT         ?C_C51STARTUP
+            CODE    02B5H     0067H     UNIT         ?PR?NRF24L01_CHECK?MAIN
+            CODE    031CH     0051H     UNIT         ?PR?_NRF24L01_RT_INIT?MAIN
+            CODE    036DH     0032H     UNIT         ?PR?_NRF24L01_WRITE_BUF?MAIN
+            CODE    039FH     0031H     UNIT         ?PR?_NRF24L01_READ_BUF?MAIN
+            CODE    03D0H     002FH     UNIT         ?PR?_NRF24L01_RXPACKET?MAIN
+            CODE    03FFH     002AH     UNIT         ?PR?_NRF24L01_TXPACKET?MAIN
+            CODE    0429H     001FH     UNIT         ?PR?_SEND_BUF?MAIN
+            CODE    0448H     001FH     UNIT         ?PR?_DELAY?MAIN
+            CODE    0467H     001CH     UNIT         ?PR?_NRF24L01_WRITE_REG?MAIN
+            CODE    0483H     0019H     UNIT         ?PR?_SPI_RW?MAIN
+            CODE    049CH     0015H     UNIT         ?C_INITSEG
+            CODE    04B1H     000FH     UNIT         ?PR?DELAY_150US?MAIN
+            CODE    04C0H     000DH     UNIT         ?PR?_NRF24L01_READ_REG?MAIN
+            CODE    04CDH     000CH     UNIT         ?PR?_DELAY_US?MAIN
+            CODE    04D9H     000AH     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   遥控小车 (?C_STARTUP)
+
+
+SEGMENT                                DATA_GROUP 
+  +--> CALLED SEGMENT                START    LENGTH
+----------------------------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/08/2017  13:53:22  PAGE 2
+
+
+?C_C51STARTUP                        -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                        -----    -----
+  +--> ?PR?NRF24L01_CHECK?MAIN
+  +--> ?PR?_NRF24L01_RT_INIT?MAIN
+  +--> ?PR?_DELAY?MAIN
+  +--> ?PR?_SEND_BUF?MAIN
+
+?PR?NRF24L01_CHECK?MAIN              0034H    000AH
+  +--> ?CO?MAIN
+  +--> ?PR?_NRF24L01_WRITE_BUF?MAIN
+  +--> ?PR?_NRF24L01_READ_BUF?MAIN
+
+?PR?_NRF24L01_WRITE_BUF?MAIN         003EH    0005H
+  +--> ?PR?_SPI_RW?MAIN
+
+?PR?_NRF24L01_READ_BUF?MAIN          003EH    0005H
+  +--> ?PR?_SPI_RW?MAIN
+
+?PR?_NRF24L01_RT_INIT?MAIN           0034H    000AH
+  +--> ?PR?_NRF24L01_WRITE_REG?MAIN
+  +--> ?PR?_NRF24L01_WRITE_BUF?MAIN
+
+?PR?_NRF24L01_WRITE_REG?MAIN         -----    -----
+  +--> ?PR?_NRF24L01_READ_REG?MAIN
+  +--> ?PR?_SPI_RW?MAIN
+
+?PR?_NRF24L01_READ_REG?MAIN          -----    -----
+  +--> ?PR?_SPI_RW?MAIN
+
+?PR?_SEND_BUF?MAIN                   -----    -----
+  +--> ?PR?_NRF24L01_WRITE_REG?MAIN
+  +--> ?PR?_DELAY_US?MAIN
+  +--> ?PR?_NRF24L01_TXPACKET?MAIN
+
+?PR?_NRF24L01_TXPACKET?MAIN          -----    -----
+  +--> ?PR?_NRF24L01_WRITE_BUF?MAIN
+  +--> ?PR?_NRF24L01_WRITE_REG?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  遥控小车 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0229H         SEGMENT       ?C_C51STARTUP
+  I:0046H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/08/2017  13:53:22  PAGE 3
+
+
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:022CH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0229H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0229H         LINE#         133
+  C:022BH         LINE#         134
+  C:022CH         LINE#         135
+  C:022DH         LINE#         136
+  C:022FH         LINE#         185
+  C:0232H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  B:0090H.3       PUBLIC        NRF_MISO
+  B:0090H.1       PUBLIC        NRF_MOSI
+  D:0090H         PUBLIC        P1
+  B:0080H.1       PUBLIC        action
+  D:00A0H         PUBLIC        P2
+  C:03D0H         PUBLIC        _NRF24L01_RxPacket
+  B:0080H.2       PUBLIC        KEY_down
+  C:03FFH         PUBLIC        _NRF24L01_TxPacket
+  B:0080H.7       PUBLIC        LED1
+  B:0080H.6       PUBLIC        LED2
+  B:0080H.5       PUBLIC        LED3
+  C:0448H         PUBLIC        _delay
+  D:0008H         PUBLIC        speed
+  D:0009H         PUBLIC        RX_ADDRESS
+  D:000EH         PUBLIC        TX_ADDRESS
+  C:0134H         PUBLIC        main
+  B:0090H.4       PUBLIC        NRF_SCK
+  B:0090H.0       PUBLIC        NRF_CSN
+  D:0013H         PUBLIC        rate
+  B:0080H.0       PUBLIC        KEY_up
+  B:0090H.2       PUBLIC        NRF_IRQ
+  C:02B5H         PUBLIC        NRF24L01_Check
+  D:0014H         PUBLIC        rece_buf
+  C:04D9H         SYMBOL        _?ix1000
+  C:04DEH         SYMBOL        _?ix1001
+  B:0090H.5       PUBLIC        NRF_CE
+  B:00A0H.3       PUBLIC        LKEY_down
+  C:039FH         PUBLIC        _NRF24L01_Read_Buf
+  C:04C0H         PUBLIC        _NRF24L01_Read_Reg
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/08/2017  13:53:22  PAGE 4
+
+
+  C:04CDH         PUBLIC        _delay_us
+  C:0429H         PUBLIC        _SEND_BUF
+  C:036DH         PUBLIC        _NRF24L01_Write_Buf
+  C:0472H         PUBLIC        _NRF24L01_Write_Reg
+  C:04B1H         PUBLIC        delay_150us
+  C:0483H         PUBLIC        _SPI_RW
+  C:031CH         PUBLIC        _NRF24L01_RT_Init
+  B:00A0H.2       PUBLIC        LKEY_up
+  -------         PROC          _DELAY_US
+  D:0007H         SYMBOL        num
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:04CDH         LINE#         58
+  C:04CDH         LINE#         59
+  C:04CDH         LINE#         61
+  C:04D4H         LINE#         62
+  C:04D8H         LINE#         63
+  -------         ENDPROC       _DELAY_US
+  -------         PROC          DELAY_150US
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:04B1H         LINE#         64
+  C:04B1H         LINE#         65
+  C:04B1H         LINE#         67
+  C:04BFH         LINE#         68
+  -------         ENDPROC       DELAY_150US
+  -------         PROC          _SPI_RW
+  D:0007H         SYMBOL        byte
+  -------         DO            
+  D:0006H         SYMBOL        bit_ctr
+  -------         ENDDO         
+  C:0483H         LINE#         72
+  C:0483H         LINE#         73
+  C:0483H         LINE#         75
+  C:0485H         LINE#         76
+  C:0485H         LINE#         77
+  C:0489H         LINE#         78
+  C:048DH         LINE#         79
+  C:048FH         LINE#         80
+  C:0495H         LINE#         81
+  C:0497H         LINE#         82
+  C:049BH         LINE#         83
+  C:049BH         LINE#         84
+  -------         ENDPROC       _SPI_RW
+  -------         PROC          L?0084
+  -------         ENDPROC       L?0084
+  -------         PROC          _NRF24L01_WRITE_REG
+  D:0007H         SYMBOL        reg
+  D:0005H         SYMBOL        value
+  -------         DO            
+  D:0004H         SYMBOL        status
+  -------         ENDDO         
+  C:0472H         LINE#         91
+  C:0472H         LINE#         92
+  C:0472H         LINE#         94
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/08/2017  13:53:22  PAGE 5
+
+
+  C:0474H         LINE#         95
+  C:0479H         LINE#         96
+  C:047EH         LINE#         97
+  C:0480H         LINE#         98
+  C:0482H         LINE#         99
+  -------         ENDPROC       _NRF24L01_WRITE_REG
+  -------         PROC          _NRF24L01_READ_REG
+  D:0007H         SYMBOL        reg
+  -------         DO            
+  D:0007H         SYMBOL        value
+  -------         ENDDO         
+  C:04C0H         LINE#         105
+  C:04C0H         LINE#         106
+  C:04C0H         LINE#         108
+  C:04C2H         LINE#         109
+  C:04C5H         LINE#         110
+  C:04CAH         LINE#         111
+  C:04CCH         LINE#         112
+  C:04CCH         LINE#         113
+  -------         ENDPROC       _NRF24L01_READ_REG
+  -------         PROC          _NRF24L01_READ_BUF
+  D:0007H         SYMBOL        reg
+  D:003FH         SYMBOL        pBuf
+  D:0042H         SYMBOL        len
+  -------         DO            
+  D:0005H         SYMBOL        status
+  D:0004H         SYMBOL        u8_ctr
+  -------         ENDDO         
+  C:039FH         LINE#         121
+  C:03A5H         LINE#         122
+  C:03A5H         LINE#         124
+  C:03A7H         LINE#         125
+  C:03ACH         LINE#         126
+  C:03B4H         LINE#         127
+  C:03CBH         LINE#         128
+  C:03CDH         LINE#         129
+  C:03CFH         LINE#         130
+  -------         ENDPROC       _NRF24L01_READ_BUF
+  -------         PROC          _NRF24L01_WRITE_BUF
+  D:0007H         SYMBOL        reg
+  D:003FH         SYMBOL        pBuf
+  D:0042H         SYMBOL        len
+  -------         DO            
+  D:0005H         SYMBOL        status
+  D:0004H         SYMBOL        u8_ctr
+  -------         ENDDO         
+  C:036DH         LINE#         137
+  C:0373H         LINE#         138
+  C:0373H         LINE#         140
+  C:0375H         LINE#         141
+  C:037AH         LINE#         142
+  C:0382H         LINE#         143
+  C:039AH         LINE#         144
+  C:039CH         LINE#         145
+  C:039EH         LINE#         146
+  -------         ENDPROC       _NRF24L01_WRITE_BUF
+  -------         PROC          _NRF24L01_RXPACKET
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/08/2017  13:53:22  PAGE 6
+
+
+  D:0043H         SYMBOL        rxbuf
+  -------         DO            
+  D:0003H         SYMBOL        state
+  -------         ENDDO         
+  C:03D0H         LINE#         153
+  C:03D6H         LINE#         154
+  C:03D6H         LINE#         156
+  C:03D6H         LINE#         157
+  C:03D9H         LINE#         158
+  C:03DDH         LINE#         159
+  C:03DDH         LINE#         160
+  C:03DFH         LINE#         161
+  C:03EDH         LINE#         162
+  C:03F4H         LINE#         163
+  C:03F6H         LINE#         164
+  C:03F9H         LINE#         165
+  C:03FCH         LINE#         166
+  C:03FCH         LINE#         167
+  C:03FEH         LINE#         168
+  -------         ENDPROC       _NRF24L01_RXPACKET
+  -------         PROC          _NRF24L01_TXPACKET
+  D:0001H         SYMBOL        txbuf
+  -------         DO            
+  D:0003H         SYMBOL        state
+  -------         ENDDO         
+  C:03FFH         LINE#         176
+  C:03FFH         LINE#         177
+  C:03FFH         LINE#         179
+  C:0401H         LINE#         180
+  C:0409H         LINE#         181
+  C:040BH         LINE#         182
+  C:040EH         LINE#         183
+  C:040EH         LINE#         184
+  C:0411H         LINE#         185
+  C:0415H         LINE#         186
+  C:0415H         LINE#         187
+  C:041CH         LINE#         188
+  C:041FH         LINE#         189
+  C:041FH         LINE#         190
+  C:0423H         LINE#         191
+  C:0423H         LINE#         192
+  C:0426H         LINE#         193
+  C:0426H         LINE#         194
+  C:0428H         LINE#         195
+  -------         ENDPROC       _NRF24L01_TXPACKET
+  -------         PROC          NRF24L01_CHECK
+  -------         DO            
+  D:0034H         SYMBOL        check_in_buf
+  D:0039H         SYMBOL        check_out_buf
+  -------         ENDDO         
+  C:02B5H         LINE#         201
+  C:02B5H         LINE#         202
+  C:02B5H         LINE#         203
+  C:02C8H         LINE#         204
+  C:02DBH         LINE#         205
+  C:02DDH         LINE#         206
+  C:02DFH         LINE#         207
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/08/2017  13:53:22  PAGE 7
+
+
+  C:02E1H         LINE#         209
+  C:02EFH         LINE#         211
+  C:02FDH         LINE#         213
+  C:0319H         LINE#         218
+  C:031BH         LINE#         219
+  -------         ENDPROC       NRF24L01_CHECK
+  -------         PROC          _NRF24L01_RT_INIT
+  D:0005H         SYMBOL        PLOAD_WIDTH
+  D:0001H         SYMBOL        TX_ADR
+  D:0038H         SYMBOL        TX_ADDR_WIDTH
+  D:0039H         SYMBOL        RX_ADR
+  D:003CH         SYMBOL        RX_ADDR_WIDTH
+  D:003DH         SYMBOL        RATE
+  C:031CH         LINE#         230
+  C:031EH         LINE#         231
+  C:031EH         LINE#         232
+  C:0320H         LINE#         233
+  C:0325H         LINE#         234
+  C:032CH         LINE#         235
+  C:0334H         LINE#         236
+  C:0342H         LINE#         238
+  C:0349H         LINE#         239
+  C:034EH         LINE#         241
+  C:0355H         LINE#         242
+  C:035CH         LINE#         243
+  C:0363H         LINE#         244
+  C:036AH         LINE#         245
+  C:036CH         LINE#         246
+  -------         ENDPROC       _NRF24L01_RT_INIT
+  -------         PROC          _SEND_BUF
+  D:0001H         SYMBOL        buf
+  C:0429H         LINE#         252
+  C:0429H         LINE#         253
+  C:0429H         LINE#         254
+  C:042BH         LINE#         255
+  C:0432H         LINE#         256
+  C:0434H         LINE#         257
+  C:0439H         LINE#         258
+  C:043CH         LINE#         259
+  C:043EH         LINE#         260
+  C:0445H         LINE#         261
+  C:0447H         LINE#         262
+  -------         ENDPROC       _SEND_BUF
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:0004H         SYMBOL        a
+  D:0002H         SYMBOL        b
+  -------         ENDDO         
+  C:0448H         LINE#         28
+  C:0448H         LINE#         29
+  C:0448H         LINE#         31
+  C:0452H         LINE#         32
+  C:0466H         LINE#         33
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/08/2017  13:53:22  PAGE 8
+
+
+  D:0082H         SYMBOL        i
+  -------         ENDDO         
+  C:0134H         LINE#         34
+  C:0134H         LINE#         35
+  C:0134H         LINE#         36
+  C:0137H         LINE#         37
+  C:013AH         LINE#         39
+  C:0140H         LINE#         40
+  C:015DH         LINE#         41
+  C:0160H         LINE#         42
+  C:0160H         LINE#         43
+  C:0167H         LINE#         44
+  C:0169H         LINE#         45
+  C:0172H         LINE#         46
+  C:0174H         LINE#         47
+  C:0176H         LINE#         48
+  C:0178H         LINE#         50
+  C:0178H         LINE#         51
+  C:0178H         LINE#         52
+  C:018AH         LINE#         53
+  C:018AH         LINE#         54
+  C:0191H         LINE#         55
+  C:0193H         LINE#         56
+  C:0195H         LINE#         57
+  C:0197H         LINE#         58
+  C:019AH         LINE#         59
+  C:019AH         LINE#         60
+  C:019DH         LINE#         61
+  C:01A0H         LINE#         62
+  C:01A6H         LINE#         63
+  C:01ABH         LINE#         64
+  C:01AEH         LINE#         65
+  C:01AEH         LINE#         66
+  C:01AEH         LINE#         68
+  C:01AEH         LINE#         69
+  C:01B0H         LINE#         70
+  C:01B3H         LINE#         71
+  C:01B3H         LINE#         72
+  C:01B6H         LINE#         73
+  C:01B9H         LINE#         74
+  C:01BFH         LINE#         75
+  C:01C4H         LINE#         76
+  C:01C7H         LINE#         77
+  C:01C7H         LINE#         78
+  C:01C7H         LINE#         79
+  C:01C7H         LINE#         80
+  C:01C9H         LINE#         81
+  C:01CCH         LINE#         82
+  C:01CCH         LINE#         83
+  C:01CFH         LINE#         84
+  C:01D2H         LINE#         85
+  C:01D4H         LINE#         86
+  C:01DBH         LINE#         87
+  C:01DEH         LINE#         88
+  C:01DEH         LINE#         89
+  C:01DEH         LINE#         90
+  C:01DEH         LINE#         91
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/08/2017  13:53:22  PAGE 9
+
+
+  C:01E0H         LINE#         92
+  C:01E3H         LINE#         93
+  C:01E3H         LINE#         94
+  C:01E6H         LINE#         95
+  C:01E9H         LINE#         96
+  C:01EBH         LINE#         97
+  C:01F2H         LINE#         98
+  C:01F5H         LINE#         99
+  C:01F8H         LINE#         100
+  C:01FAH         LINE#         101
+  C:01FAH         LINE#         102
+  C:01FCH         LINE#         103
+  C:0202H         LINE#         104
+  C:0202H         LINE#         105
+  C:0205H         LINE#         106
+  C:0208H         LINE#         107
+  C:020BH         LINE#         108
+  C:020EH         LINE#         109
+  C:0216H         LINE#         110
+  C:021DH         LINE#         111
+  C:021DH         LINE#         112
+  C:0220H         LINE#         114
+  C:0220H         LINE#         115
+  C:0222H         LINE#         116
+  C:0224H         LINE#         117
+  C:0226H         LINE#         121
+  C:0226H         LINE#         123
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?COPY
+  C:00D3H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?CLDPTR
+  C:00F9H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:0112H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NRF24L01_RXPACKET?MAIN
+
+Program Size: data=71.0 xdata=0 code=1251
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
