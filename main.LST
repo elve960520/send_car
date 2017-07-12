@@ -1,151 +1,199 @@
-C51 COMPILER V9.56.0.0   MAIN                                                              07/08/2017 13:53:22 PAGE 1   
+C51 COMPILER V9.01   MAIN                                                                  12/03/2016 12:35:25 PAGE 1   
 
 
-C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
 OBJECT MODULE PLACED IN main.OBJ
-COMPILER INVOKED BY: C:\Program Files (x86)\Keil_C51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND 
-                    -TABS(2)
+COMPILER INVOKED BY: F:\Keil_C51\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
 
 line level    source
 
    1          #include "nRF24L01.h" 
-   2            
+   2                  
    3          uchar TX_ADDRESS[TX_ADR_WIDTH]={0xB2,0x52,0xF4,0x09,0x71}; //发送地址
    4          uchar RX_ADDRESS[RX_ADR_WIDTH]={0xB1,0x51,0xF3,0x08,0x70}; //接收地址
    5          
-   6          uchar    rate = 0x0F;    //2Mbs, 0dB  低噪声增益开启
-   7          uchar    speed = 0x00;
+   6          uchar   rate = 0x0F;    //2Mbs, 0dB  低噪声增益开启
+   7          
    8          
-   9          sbit    KEY_up      =P0^0;      
-  10          sbit    KEY_down    =P0^2;      
-  11          //sbit    KEY_left    =P2^3;        
-  12          //sbit    KEY_right   =P2^1;
+   9          sbit    KEY_up      =P0^0;                      
+  10          sbit    KEY_down    =P0^2;                      
+  11          sbit    KEY_left    =P2^3;                              
+  12          sbit    KEY_right   =P2^1;
   13          
-  14          sbit    LKEY_up     =P2^2;      
-  15          sbit    LKEY_down   =P2^3;
+  14          sbit    LKEY_up     =P2^2;                      
+  15          sbit    RKEY_up     =P2^0;
   16          
   17          sbit    action      =P0^1;
   18          
-  19          //sbit    M1          =P2^0;
-  20          //sbit    M2          =P2^1;
+  19          sbit    M1                      =P2^0;
+  20          sbit    M2                      =P2^1;
   21          
   22          
-  23          sbit    LED1      =P0^7;        //    前进的按键接口  根据自己焊接决定
-  24          sbit    LED2      =P0^6;        //    前进的按键接口  根据自己焊接决定
-  25          sbit    LED3      =P0^5;  
-  26          uchar rece_buf[32];             //接收寄存器
+  23          sbit    LED1      =P0^7;                                //        前进的按键接口  根据自己焊接决定
+  24          sbit    LED2      =P0^6;                                //        前进的按键接口  根据自己焊接决定
+  25          sbit    LED3      =P0^5;        
+  26          uchar rece_buf[32];                                                     //接收寄存器
   27          
   28          void delay(uint t)
   29          {
-  30   1        uint a,b;
-  31   1        for(a=0;a<t;a++)
-  32   1          for (b=0;b<255;b++);
+  30   1              uint a,b;
+  31   1              for(a=0;a<t;a++)
+  32   1                      for (b=0;b<255;b++);
   33   1      }
   34          void main()
-  35          { int i;
-  36   1        P0|=0x0f; //拉高按键引脚
-  37   1        P2|=0x0f;
+  35          {       int i;
+  36   1              P0|=0x0f;       //拉高按键引脚
+  37   1              P2|=0x0f;
   38   1      
-  39   1        while(NRF24L01_Check());                    //等待检测到NRF24L01，程序才会向下执行
-  40   1        NRF24L01_RT_Init(TX_PLOAD_WIDTH,TX_ADDRESS,TX_ADR_WIDTH,RX_ADDRESS,RX_ADR_WIDTH,rate);
-  41   1        for(i=0;i<12;i++)
-  42   1        {
-  43   2            delay(100); 
-  44   2            LED1=~LED1;
-  45   2        }
-  46   1        LED1=1;
-  47   1        LED2=0;
-  48   1        LED3=1;
-  49   1              
-  50   1        while(1)
-  51   1        {
-  52   2          if((KEY_up==0)||(KEY_down==0)||(LKEY_up==0)||(LKEY_down==0)||(action==0))
-  53   2          {
-  54   3            delay(10);
-C51 COMPILER V9.56.0.0   MAIN                                                              07/08/2017 13:53:22 PAGE 2   
+  39   1              while(NRF24L01_Check());                    //等待检测到NRF24L01，程序才会向下执行
+  40   1              NRF24L01_RT_Init(TX_PLOAD_WIDTH,TX_ADDRESS,TX_ADR_WIDTH,RX_ADDRESS,RX_ADR_WIDTH,rate);
+  41   1              for(i=0;i<12;i++)
+  42   1                      {
+  43   2                              delay(100);     
+  44   2                              LED1=~LED1;
+  45   2                      }
+  46   1              LED1=1;
+  47   1          LED2=0;
+  48   1              LED3=1;
+  49   1                                      
+  50   1              while(1)
+  51   1              {
+  52   2       //     **************************************
+  53   2                      if((KEY_up==0)||(KEY_down==0)||(KEY_left==0)||(KEY_right==0)||(LKEY_up==0)||(RKEY_up==0)||(action==0))
+  54   2                      {
+  55   3                              delay(10);
+C51 COMPILER V9.01   MAIN                                                                  12/03/2016 12:35:25 PAGE 2   
 
-  55   3            LED1=0;
-  56   3            LED2=1;
-  57   3            LED3=0;
-  58   3            if(KEY_up==0)           
-  59   3            {
-  60   4              rece_buf[0]=1;              //一共要发送1个字节，rece_buf[0]=1
-  61   4              while(!KEY_up);   //持续发送
-  62   4              speed +=10;
-  63   4              if(speed>=80)
-  64   4                speed=80;
-  65   4              rece_buf[1]= speed;
-  66   4              SEND_BUF(rece_buf);
-  67   4              
-  68   4               delay(10);   
-  69   4            }
-  70   3            else if(KEY_down==0)              
-  71   3            {
-  72   4              rece_buf[0]=1;            
-  73   4              while(!KEY_down);   //持续发送
-  74   4              speed -=10;
-  75   4              if(speed<=0)
-  76   4                speed = 0;
-  77   4              rece_buf[1]= speed;
-  78   4              SEND_BUF(rece_buf);
-  79   4              delay(10);
-  80   4            }
-  81   3            else if(LKEY_up==0)               
-  82   3            {
-  83   4              rece_buf[0]=1;              //一共要发送1个字节，rece_buf[0]=1
-  84   4              while(!KEY_up);   //持续发送
-  85   4              speed ++;
-  86   4              if(speed>=80)
-  87   4                speed=80;
-  88   4              rece_buf[1]= speed;
-  89   4              SEND_BUF(rece_buf);
-  90   4              delay(10);        
-  91   4            }
-  92   3            else if(LKEY_down==0)               
-  93   3            {
-  94   4              rece_buf[0]=1;            
-  95   4              while(!KEY_down);   //持续发送
-  96   4              speed --;
-  97   4              if(speed<=0)
-  98   4                speed = 0;
-  99   4              rece_buf[1]= speed;
- 100   4              SEND_BUF(rece_buf);
- 101   4              delay(10);      
- 102   4            }
- 103   3            else if(action==0)                
- 104   3            {
- 105   4              rece_buf[0]=1;              //一共要发送1个字节，rece_buf[0]=1
- 106   4              while(!KEY_up);   //持续发送
- 107   4              speed = 0;
- 108   4              rece_buf[1]= speed;
- 109   4              SEND_BUF(rece_buf);
- 110   4               delay(10);       
- 111   4            }               
- 112   3          }
- 113   2          else                
- 114   2          {
- 115   3            LED1=1;
- 116   3            LED2=0;
-C51 COMPILER V9.56.0.0   MAIN                                                              07/08/2017 13:53:22 PAGE 3   
+  56   3                              LED1=0;
+  57   3                          LED2=1;
+  58   3                              LED3=0;
+  59   3                              if(KEY_up==0)                                           
+  60   3                              {
+  61   4                                      rece_buf[0]=1;                                          //一共要发送1个字节，rece_buf[0]=1
+  62   4                                      
+  63   4                                      while(!KEY_up)    //持续发送
+  64   4                                      {
+  65   5                                         if(KEY_left==0)
+  66   5                                         {
+  67   6                                               rece_buf[1]='5';
+  68   6                                         }
+  69   5                                         else if(KEY_right==0)
+  70   5                                         {
+  71   6                                           rece_buf[1]='6'; 
+  72   6                                         }
+  73   5                                         else
+  74   5                                         {
+  75   6                                           rece_buf[1]='1';
+  76   6                                         }
+  77   5                                              SEND_BUF(rece_buf);
+  78   5      //                                      if(action==0)
+  79   5      //                                      {
+  80   5      //                                        rece_buf[1]='9';
+  81   5      //                                        SEND_BUF(rece_buf);
+  82   5      //                                      }
+  83   5                                      }
+  84   4                                  delay(10);          
+  85   4                              }
+  86   3                              else if(KEY_down==0)                                            
+  87   3                              {
+  88   4                                      //rece_buf[1]='2';
+  89   4                                      rece_buf[0]=1;                                  
+  90   4                                      
+  91   4                                      while(!KEY_down)        //持续发送
+  92   4                                      {                                  
+  93   5                                         if(KEY_left==0)
+  94   5                                         {
+  95   6                                               rece_buf[1]='7';
+  96   6                                         }
+  97   5                                         else if(KEY_right==0)
+  98   5                                         {
+  99   6                                           rece_buf[1]='8'; 
+ 100   6                                         }
+ 101   5                                         else
+ 102   5                                         {
+ 103   6                                           rece_buf[1]='b';
+ 104   6                                         }
+ 105   5                                              SEND_BUF(rece_buf);
+ 106   5      //                                      if(action==0)
+ 107   5      //                                      {
+ 108   5      //                                        rece_buf[1]='9';
+ 109   5      //                                        SEND_BUF(rece_buf);
+ 110   5      //                                      }
+ 111   5                                      }       
+ 112   4                                      delay(10);
+ 113   4                              }
+ 114   3                              else if(KEY_left==0)                                                    
+ 115   3                              {
+ 116   4                                      rece_buf[1]='5';
+ 117   4                                      rece_buf[0]=1;                                  
+C51 COMPILER V9.01   MAIN                                                                  12/03/2016 12:35:25 PAGE 3   
 
- 117   3            LED3=1;
- 118   3      //      rece_buf[1]='7';
- 119   3      //      rece_buf[0]=1;            
- 120   3      //      SEND_BUF(rece_buf);       
- 121   3          }
- 122   2      
- 123   2        }
- 124   1      }
- 125          
- 126          
+ 118   4                              
+ 119   4                                      while(!KEY_left)        //持续发送
+ 120   4                                              SEND_BUF(rece_buf);
+ 121   4                                      delay(10);                      
+ 122   4                              }
+ 123   3                              else if(KEY_right==0)                                                   
+ 124   3                              {
+ 125   4                                      rece_buf[1]='6';
+ 126   4                                      rece_buf[0]=1;                                  
+ 127   4                              
+ 128   4                                      while(!KEY_right)       //持续发送
+ 129   4                                              SEND_BUF(rece_buf);
+ 130   4                                      delay(10);                      
+ 131   4                              }
+ 132   3                              else if(LKEY_up==0)                                                     
+ 133   3                              {
+ 134   4                                      rece_buf[1]='3';
+ 135   4                                      rece_buf[0]=1;                                  
+ 136   4                              
+ 137   4                                      while(!LKEY_up)    //持续发送
+ 138   4                                              SEND_BUF(rece_buf);
+ 139   4                                      delay(10);                      
+ 140   4                              }
+ 141   3                              else if(RKEY_up==0)                                                     
+ 142   3                              {
+ 143   4                                      rece_buf[1]='4';
+ 144   4                                      rece_buf[0]=1;                                  
+ 145   4                              
+ 146   4                                      while(!RKEY_up)   //持续发送
+ 147   4                                              SEND_BUF(rece_buf);
+ 148   4                                      delay(10);                      
+ 149   4                              }
+ 150   3                              else if(action==0)                                                      
+ 151   3                              {
+ 152   4                                      rece_buf[1]='9';
+ 153   4                                      rece_buf[0]=1;                                  
+ 154   4                              
+ 155   4                                      while(!action)   //持续发送
+ 156   4                                              SEND_BUF(rece_buf);
+ 157   4                                      delay(10);                      
+ 158   4                              }                                                               
+ 159   3                      }
+ 160   2                      else                                                    
+ 161   2                      {
+ 162   3                              LED1=1;
+ 163   3                          LED2=0;
+ 164   3                              LED3=1;
+ 165   3      //                      rece_buf[1]='7';
+ 166   3      //                      rece_buf[0]=1;                                  
+ 167   3      //                      SEND_BUF(rece_buf);                             
+ 168   3                      }
+ 169   2      
+ 170   2              }
+ 171   1      }
+ 172          
+ 173          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    772    ----
+   CODE SIZE        =    821    ----
    CONSTANT SIZE    =     10    ----
    XDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   MAIN                                                                  12/03/2016 12:35:25 PAGE 4   
+
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     44      33
+   DATA SIZE        =     43      33
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
